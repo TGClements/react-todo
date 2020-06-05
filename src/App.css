@@ -1,0 +1,72 @@
+.App {
+}
+
+#mainList {
+  background-color: #393e46;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  overflow-y: auto;
+  padding-top: 1%;
+  padding-bottom: 2%;
+}
+
+#listItem {
+  background-color: #4ecca3;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+#listItem p {
+  margin-right: 3%;
+  margin-left: 3%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  word-wrap: break-word;
+}
+
+#mainList > h3 {
+  text-align: center;
+}
+
+h3 {
+  color: #eeeeee;
+}
+
+#emptyAlert {
+  text-align: center;
+}
+
+#listItem {
+  animation-name: liFadeIn;
+  animation-duration: 2s;
+}
+
+#completeButton {
+  margin: 3px 3px 3px 3px;
+}
+
+#deleteButton {
+  margin: 3px 3px 3px 3px;
+}
+
+@keyframes liFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes liFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
