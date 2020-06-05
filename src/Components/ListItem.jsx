@@ -52,6 +52,18 @@ function ListItem({ items, setItems, pendingItems, setPendingItems }) {
                       let newArray = [...items];
                       newArray.splice(i, 1);
 
+                      /*----------------------------------------------------------*/
+                      // This onClick really needs to just be refactored, but at
+                      // this point, that would just take too much time and I would
+                      // end up with incomplete code. This works for the most part,
+                      // but I keep alternating between bugs. Fix bug1, bug2
+                      // appears, fix bug2, bug1 appears, etc. I really should re-
+                      // factor it to use an array of objects instead of just an
+                      // array, then have an object for each list item, and store
+                      // things as flags, like completed, but there is no time for
+                      // me to try to do that. Pls have mercy on me D:
+                      /*----------------------------------------------------------*/
+
                       // Assign a fadeout animation to the list item that plays for 1s
                       let x = document.getElementById(i);
                       x.style.animationName = 'liFadeOut';
@@ -65,8 +77,6 @@ function ListItem({ items, setItems, pendingItems, setPendingItems }) {
                         x.style.animationName = 'none';
                         x.style.animationDuration = '0';
 
-                        //if (i !== items.length) {
-                        //HERE
                         if (x.style.textDecoration === 'line-through') {
                           x.style.textDecoration = 'none';
                           x.style.color = 'black';
@@ -76,6 +86,7 @@ function ListItem({ items, setItems, pendingItems, setPendingItems }) {
                           );
                           submitBtn[0].style.visibility = 'visible';
                         }
+
                         // If an item that is not at index 0 is deleted, we need to check if any item lower than it was marked as completed
                         // If it was marked completed, we need to transfer the styling up an element, then reset the original element
                         // Ex. if element 3 is marked complete & element 2 was deleted, the array values would shift up, but the styling would
@@ -102,7 +113,29 @@ function ListItem({ items, setItems, pendingItems, setPendingItems }) {
                             submitBtn3[0].style.visibility = 'visible';
                           }
                         }
-                        //}
+                      }, 1000);
+                      // This is just to update the last element
+                      setTimeout(() => {
+                        // Update the styling of the last listitem if there are more items in the list and the listitem being deleted is not the last listitem
+                        console.log(items.length);
+                        console.log(i);
+                        //if()
+                        if (items.length !== 1 && i !== items.length - 2) {
+                          console.log('updating last list item: ');
+                          console.log(items.length - 1);
+                          console.log(i !== items.length - 1);
+                          document.getElementById(
+                            items.length - 2
+                          ).style.color = 'grey';
+                          document.getElementById(
+                            items.length - 2
+                          ).style.textDecoration = 'line-through';
+                          document
+                            .getElementById(items.length - 2)
+                            .getElementsByClassName(
+                              'btn-outline-primary'
+                            )[0].style.visibility = 'hidden';
+                        }
                         // Get the amount of pending items
                         let tempCounter = 0;
                         for (i = 0; i < items.length - 1; i++) {
@@ -112,7 +145,7 @@ function ListItem({ items, setItems, pendingItems, setPendingItems }) {
                           }
                         }
                         setPendingItems(tempCounter);
-                      }, 1000);
+                      }, 1001); //
                     }}
                   >
                     <svg
